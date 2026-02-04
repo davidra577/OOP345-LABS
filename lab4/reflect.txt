@@ -1,0 +1,99 @@
+// Name :David Ra
+// Student ID :101977205
+// Email: dra@myseneca.ca
+// Lab 4 reflection 
+// SECTION: OOP345 NBB
+// Date: Feb 13th 2021 
+In workshop 4 of OOP344, I have learned how to design and code composition and aggregation class relationships, and design and coded a class that manages a dynamically allocated array of pointers to objects.
+
+Composition is a relationship between classes which implements complete ownership.
+Composition is less coupled, meaning that it is more flexible compared to another relationship "inheritance".
+
+Aggregation is the weakest relationship between classes.
+It does not manage the creation or destruction of the objects that it uses.
+The responsibility for creating and destroying the object lies outside of aggregation type.
+The objects used survive the destruction of aggregator.
+
+Thus, In Aggregation type, a child can exist independently of the parent.
+If there are two classes 1) parent class, and 2) child class.
+If the parent class is deleted, the child class will exist.
+
+In composition type, aa child cannot exist independently of the parent.
+If there are two classes 1) house class and 2) room class.
+If the house is deleted, then the room does not exist. Thus, the room is also deleted.
+
+Aggregation is a "has a" like relationship with a class and Composition is "part of" a class.
+
+An aggregation uses pointer to hold implementation of the class.
+Aggregation stops existing once the pointer address does not exist.
+
+An aggregation would use a member variable (copy) to hold the implementation of the class.
+So it can still exist when the class is gone as it holds it in its own class.
+
+A move assignment function would use composition to hold the implementation of the class.'
+Therefore, the aggregation would stop existing once the pointer address no longer exists.
+
+An example of aggregation used for workshop 4 is the relationship between ConfirmationSender class and Reservation.
+
+From ConfirmationSender.h
+
+namespace sdds
+{
+    class ConfirmationSender
+    {
+        const Reservation** reserv;
+        size_t index;
+
+    public:
+        ConfirmationSender();
+        ~ConfirmationSender();
+        ConfirmationSender(const ConfirmationSender&);           
+        ConfirmationSender& operator=(const ConfirmationSender&); 
+        ConfirmationSender(ConfirmationSender&&);                 
+        ConfirmationSender& operator=(ConfirmationSender&&);      
+        ConfirmationSender& operator+=(const Reservation& res);
+        ConfirmationSender& operator-=(const Reservation& res);
+        void display(std::ostream& os) const;
+        friend std::ostream& operator<<(std::ostream& out, const ConfirmationSender& cs);
+    };
+
+} 
+
+The parent class is the ConfirmationSender and the child class is Reservation class.
+This is an example of aggregation because the child class can act independently and can exist without the parents’ class.
+The class Reservation can still exist without being part of ConfirmationSender. 
+
+
+An example of composition is the relationship between Restaurant and Reservation class.
+
+From Restaurant.has
+
+namespace sdds
+{
+    class Restaurant
+    {
+        size_t storedIndex;
+        Reservation* reservs;
+
+    public:
+        Restaurant();
+        ~Restaurant();
+        Restaurant(const Reservation* reservations[], size_t cnt);
+        size_t size() const;
+
+        Restaurant(const Restaurant&);           
+        Restaurant& operator=(const Restaurant&); 
+        Restaurant(Restaurant&&);                 
+        Restaurant& operator=(Restaurant&&);     
+
+        void display(std::ostream& os) const;
+        friend std::ostream& operator<<(std::ostream& out, const Restaurant& restaurant);
+    };  
+}
+
+The parent class it the Restaurant class and the child class is the Reservation class.
+From logical point of view, if there is no restaurant, then there are no reservations.
+The reservation class cannot exist if the Restaurant class does not exist.
+This is an example of composition because A composition is incomplete without its components.
+The Reservation does not exist apart from the Restaurant.
+
