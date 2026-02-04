@@ -1,0 +1,52 @@
+// Name :David Ra
+// Student ID :101977205
+// Email: dra@myseneca.ca
+// Lab 5 reflection 
+// SECTION: OOP345 NBB
+// Date: Feb 23rd 2021 
+In workshop 5 of OOP344, I have learned how to design and code templated class that allocates and deallocates dynamic memory, design and code a function object, lambda expression and throw exceptions of different types.
+
+A lambda expression is a functor without a typename.
+A functor is similar to a class.
+
+During a complex scenario, a functor should be used to create a closure due to functor being similar to an object.
+Defining a functor simply adds complexity due to having many member variables, etc.
+
+A lambda expression should be used when the method is simple.
+A lambda expression creates an nameless functor
+
+From SpellChecker.cpp file:
+	SpellChecker::SpellChecker(const char* filename)
+	{
+		std::ifstream file(filename);
+		if (file.is_open() == false)
+			throw "Bad file name!";
+		
+		
+The constructor for SpellChecker generates an exception when the file is not open.
+Another method without exceptions is to:
+
+"
+std::ifstream file(filename);
+if (!file)
+{
+   break;
+}
+else
+{
+...
+}
+"
+
+This produces same result, except when you use throw, you can display custom error message. 
+As for (!file), you would have to use "std::cout" in order to display custom error message before the "break" command.
+
+
+
+I would add a new class for loading data.
+By importing the new loading class in the header, this reduces duplication of logic in each individual class.
+It also makes it very convenient to maintain and edit.
+
+The class Movie and Book are instantiated form main() function using a custom constructor but they also contain a default constructor.
+The default constructors are required and used by various classes.
+For example, Collection.h have a matching constructor which requires a default constructor to initialize.
