@@ -1,0 +1,36 @@
+// Name :David Ra
+// Student ID :101977205
+// Email: dra@myseneca.ca
+// Lab 3 reflection
+// SECTION: OOP345 NBB
+// Date: Feb 6th 2021
+
+
+From workshop 3 of OOP345, I have learned how to design and code class templates, template a class variable, derive a templated class from another templated class, and instantiate and specialize templated class.
+C++ implements parametric/generic polymorphism through templates.
+Templates can be instantiated with different type and they are instantiated at compile-time instead of link-time.
+By defining structure in a generic form can reduce code duplication significantly.
+The compiler of C++ generates class/function definition from our explicitly specified types of templates.
+I have used only the .h files (header files) instead of .h (header files) + .cpp (translation unit) files because the compiler needs to instantiate different versions of the code, depending on parameters given for template parameters.
+
+
+In PairSummable.h file:
+
+class PairSummable : public Pair<V,K> {
+        static V initial;
+        static size_t minField;
+    public:
+        PairSummable() {} 
+        PairSummable(const K& key, const V& value = initial)
+
+the "= initial" in the prototype means that if there is no value being inputted on V&, then it will use the value of "static V initial" as default.
+
+The reason for specializing += operator was because the += operator had to accept different types (string and numbers).
+Since they are different units, they must follow/have different rules.
+
+The initial value of summation had to be specialized because for different types, the program had to follow specific rule for the type.
+
+The class variable was defined outside the class difinition because each individual items could be totalled after their input.
+
+Overall, I have learned how to use templates in C++.
+I learned how to code a class template & variable, specialize/instantiate/derivate a template class from another template class.
